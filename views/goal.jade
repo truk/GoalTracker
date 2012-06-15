@@ -1,0 +1,20 @@
+h1
+	a(href="/") Goal
+	|  #{goal.name}
+
+table
+	tr
+		td Quantity
+		td= goal.quantity
+	tr
+		td Period
+		td= goal.period
+		
+h2 Records
+
+table
+	each record in goal.records
+		tr
+			td
+			td= record.date
+			td= record.quantity

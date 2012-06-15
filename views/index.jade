@@ -1,0 +1,36 @@
+h1= title
+table
+	tr
+		th Name
+		th Quantity
+		th Period
+	each goal, i in goals
+		tr 
+			td
+				a(href="/goal/#{i}")= goal.name
+			td= goal.quantity
+			td= goal.period
+			td
+				form(method="post", action="/add/#{i}")
+					input(name="quantity", value="10")
+					input(type="submit", value="add record")
+		tr
+			td
+				table
+					tr
+						th Date
+						th Quantity
+						
+					each record in goal.records
+						tr
+							td= record.date.toDateString()
+							td= record.quantity
+
+	tr
+		td(colspan="4"): hr
+	tr
+		form(method="post", action="/new")
+			td: input(name="name")
+			td: input(name="quantity")
+			td: input(name="period")
+			td: input(type="submit", value="add goal")
