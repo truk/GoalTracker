@@ -6,3 +6,19 @@ body {
 a {
   color: #00B7FF;
 }
+
+.collapser {
+	display: none;
+}
+
+input.short {
+	width:30px;
+}
+
+td.expand {
+	cursor:pointer;
+}
+
+td.expand:hover {
+	background-color:#EEE;
+}

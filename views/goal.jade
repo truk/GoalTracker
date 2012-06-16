@@ -1,14 +1,17 @@
 h1
-	a(href="/") Goal
-	|  #{goal.name}
+	a(href="/") Goals
+	|  : #{goal.action}
 
 table
 	tr
 		td Quantity
 		td= goal.quantity
 	tr
+		td Unit
+		td= goal.unit
+	tr
 		td Period
-		td= goal.period
+		td= goal.period.name
 		
 h2 Records
 

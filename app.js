@@ -57,8 +57,9 @@ app.post('/add/:id', function(req, res){
 })
 
 app.post('/new', function(req, res){
-	model.addGoal(req.param('name'), 
-		req.param('quantity'), 
+	model.addGoal(req.param('action'), 
+		req.param('quantity'),
+		req.param('unit'), 
 		req.param('period'), 
 		function(err, goal){
 			res.redirect('/');

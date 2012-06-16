@@ -1,21 +1,28 @@
 h1= title
 table
 	tr
-		th Name
+		th
+		th Action
 		th Quantity
+		th Unit
 		th Period
+		th Remaining
 	each goal, i in goals
 		tr 
+			td.expand +
 			td
-				a(href="/goal/#{i}")= goal.name
+				a(href="/goal/#{i}")= goal.action
 			td= goal.quantity
-			td= goal.period
+			td= goal.unit
+			td= goal.period.name
+			td= goal.remaining()
 			td
 				form(method="post", action="/add/#{i}")
-					input(name="quantity", value="10")
+					input(name="quantity", value="10").short
 					input(type="submit", value="add record")
-		tr
+		tr.collapser
 			td
+			td(colspan="6")
 				table
 					tr
 						th Date
@@ -27,10 +34,18 @@ table
 							td= record.quantity
 
 	tr
-		td(colspan="4"): hr
+		td(colspan="7"): hr
 	tr
 		form(method="post", action="/new")
-			td: input(name="name")
+			td
+			td: input(name="action")
 			td: input(name="quantity")
-			td: input(name="period")
+			td: input(name="unit")
+			td: select(name="period")
+				option(value="Year") Year
+				option(value="Month") Month
+				option(value="Week") Week
+				option(value="Day") Day
+				option(value="Hour") Hour
 			td: input(type="submit", value="add goal")
+			td
