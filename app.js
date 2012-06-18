@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  , Model = require('./model').Model;
+  , Model = require('./model-mongo').Model;
 
 var app = module.exports = express.createServer();
 
@@ -27,17 +27,22 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-var model = new Model();
+var model = new Model('localhost', 27017);
 model.init();
 
 // Routes
 
 app.get('/', function(req, res){
-	res.render('index', { title: 'Goals', goals: model.goals });
+  model.getGoals(function(err, goals){
+    if (err){
+      goals = [];
+    }
+	  res.render('index', { title: 'Goals', goals: goals });
+  });
 })
 
 app.get('/goal/:id', function(req, res){
-	var goal = model.getGoal(req.param('id'), function(err, goal){
+	model.getGoal(req.param('id'), function(err, goal){
 		if (err){
 			console.log(err);
 			res.redirect('/');

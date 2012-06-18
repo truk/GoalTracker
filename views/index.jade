@@ -7,17 +7,17 @@ table
 		th Unit
 		th Period
 		th Remaining
-	each goal, i in goals
+	each goal in goals
 		tr 
 			td.expand +
 			td
-				a(href="/goal/#{i}")= goal.action
+				a(href="/goal/#{goal._id}")= goal.action
 			td= goal.quantity
 			td= goal.unit
 			td= goal.period.name
-			td= goal.remaining()
+			td= goal.remaining
 			td
-				form(method="post", action="/add/#{i}")
+				form(method="post", action="/add/#{goal._id}")
 					input(name="quantity", value="10").short
 					input(type="submit", value="add record")
 		tr.collapser
