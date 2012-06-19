@@ -28,7 +28,6 @@ app.configure('production', function(){
 });
 
 var model = new Model('localhost', 27017);
-model.init();
 
 // Routes
 
@@ -37,38 +36,43 @@ app.get('/', function(req, res){
     if (err){
       goals = [];
     }
-	  res.render('index', { title: 'Goals', goals: goals });
-  });
+    res.render('index', { title: 'Goals', goals: goals });
+  })
 })
 
 app.get('/goal/:id', function(req, res){
-	model.getGoal(req.param('id'), function(err, goal){
-		if (err){
-			console.log(err);
-			res.redirect('/');
-		}else{
-			res.render('goal', { title: 'Goal:' + goal.name, goal: goal });
-		}
-	})
+  model.getGoal(req.param('id'), function(err, goal){
+    if (err){
+      res.redirect('/');
+    }else{
+      res.render('goal', { title: 'Goal:' + goal.name, goal: goal });
+    }
+  })
+})
+
+app.del('/goal/:id', function(req, res){
+  model.deleteGoal(req.param('id'), function(err, goal){
+    res.send(200);
+  })
 })
 
 app.post('/add/:id', function(req, res){
-	model.addRecord(req.param('id'), 
-		new Date(), 
-		req.param('quantity'), 
-		function(err, rec){
-			res.redirect('/');
-	})
+  model.addRecord(req.param('id'), 
+    new Date(), 
+    req.param('quantity'), 
+    function(err, rec){
+      res.redirect('/');
+  })
 })
 
 app.post('/new', function(req, res){
-	model.addGoal(req.param('action'), 
-		req.param('quantity'),
-		req.param('unit'), 
-		req.param('period'), 
-		function(err, goal){
-			res.redirect('/');
-	})
+  model.addGoal(req.param('action'), 
+    req.param('quantity'),
+    req.param('unit'), 
+    req.param('period'), 
+    function(err, goal){
+      res.redirect('/');
+  })
 })
 
 app.listen(3000, function(){

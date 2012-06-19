@@ -8,17 +8,17 @@ a {
 }
 
 .collapser {
-	display: none;
+  display: none;
 }
 
 input.short {
-	width:30px;
+  width:30px;
 }
 
 td.expand {
-	cursor:pointer;
+  cursor:pointer;
 }
 
 td.expand:hover {
-	background-color:#EEE;
+  background-color:#EEE;
 }

@@ -1,23 +1,28 @@
+script(src='/javascripts/goal.js')
+
 h1
-	a(href="/") Goals
-	|  : #{goal.action}
+  a(href="/") Goals
+  |  : #{goal.action}
 
 table
-	tr
-		td Quantity
-		td= goal.quantity
-	tr
-		td Unit
-		td= goal.unit
-	tr
-		td Period
-		td= goal.period.name
-		
+  tr
+    td Quantity
+    td= goal.quantity
+  tr
+    td Unit
+    td= goal.unit
+  tr
+    td Period
+    td= goal.period.name
+  tr
+    td(colspan="2")
+      button.delete delete
+    
 h2 Records
 
 table
-	each record in goal.records
-		tr
-			td
-			td= record.date
-			td= record.quantity
+  each record in goal.records
+    tr
+      td
+      td= record.date
+      td= record.quantity
