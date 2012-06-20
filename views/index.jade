@@ -16,10 +16,6 @@ table
       td= goal.unit
       td= goal.period.name
       td= goal.remaining
-      td
-        form(method="post", action="/add/#{goal._id}")
-          input(name="quantity", value="10").short
-          input(type="submit", value="add record")
     tr.collapser
       td
       td(colspan="6")
@@ -34,7 +30,7 @@ table
               td= record.quantity
 
   tr
-    td(colspan="7"): hr
+    td(colspan="6"): hr
   tr
     form(method="post", action="/new")
       td
@@ -48,4 +44,3 @@ table
         option(value="Day") Day
         option(value="Hour") Hour
       td: input(type="submit", value="add goal")
-      td

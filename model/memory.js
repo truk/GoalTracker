@@ -1,26 +1,6 @@
-var Goal = function(action, quantity, unit, period){
-  this.action = action;
-  this.quantity = quantity;
-  this.unit = unit;
-  this.period = new Period(period);
-  this.records = [];
-}
-
-var Period = function(name){
-  var hours = { 'Year': 8760,
-          'Month': 730,
-          'Week': 168,
-          'Day': 24,
-          'Hour': 1};
-  this.name = name;
-  this.hours = hours[name];
-  this.days = hours[name]/24;
-}
-
-var Record = function(date, quantity){
-  this.date = date;
-  this.quantity = quantity;
-}
+var Goal = require('./goal').Goal;
+var Period = require('./goal').Period;
+var Record = require('./goal').Record;
 
 var Model = exports.Model = function(host, port){
   this.goals = {};

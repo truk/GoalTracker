@@ -1,10 +1,6 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
 }
 
 .collapser {
@@ -15,10 +11,16 @@ input.short {
   width:30px;
 }
 
-td.expand {
+.expand {
   cursor:pointer;
 }
 
-td.expand:hover {
+.expand:hover {
   background-color:#EEE;
+}
+
+.bar{
+  width:300px;
+  height:20px;
+  border:1px solid #333;
 }

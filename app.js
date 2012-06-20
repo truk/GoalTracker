@@ -4,7 +4,8 @@
  */
 
 var express = require('express')
-  , Model = require('./model-mongo').Model;
+  , Model = require('./model/mongo').Model
+  , Util = require('./util').Util;
 
 var app = module.exports = express.createServer();
 
@@ -28,6 +29,7 @@ app.configure('production', function(){
 });
 
 var model = new Model('localhost', 27017);
+var util = new Util();
 
 // Routes
 
@@ -45,7 +47,10 @@ app.get('/goal/:id', function(req, res){
     if (err){
       res.redirect('/');
     }else{
-      res.render('goal', { title: 'Goal:' + goal.name, goal: goal });
+      res.render('goal', 
+                 { dates: util.dateList(7), 
+                   title: 'Goal:' + goal.name, 
+                   goal: goal });
     }
   })
 })
@@ -56,12 +61,16 @@ app.del('/goal/:id', function(req, res){
   })
 })
 
-app.post('/add/:id', function(req, res){
+app.post('/goal/:id/add', function(req, res){
+  var d = new Date();
+  if (req.param('date')){
+    d = new Date(req.param('date'));
+  }
   model.addRecord(req.param('id'), 
-    new Date(), 
-    req.param('quantity'), 
+    d, 
+    req.param('quantity'),
     function(err, rec){
-      res.redirect('/');
+      res.send(rec);
   })
 })
 
@@ -76,5 +85,7 @@ app.post('/new', function(req, res){
 })
 
 app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log("Express server listening on port %d in %s mode", 
+              app.address().port, 
+              app.settings.env);
 });

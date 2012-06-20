@@ -1,28 +1,35 @@
 script(src='/javascripts/goal.js')
+link(rel='stylesheet', href='/stylesheets/goal.css')
 
-h1
+#header.section
   a(href="/") Goals
-  |  : #{goal.action}
 
-table
-  tr
-    td Quantity
-    td= goal.quantity
-  tr
-    td Unit
-    td= goal.unit
-  tr
-    td Period
-    td= goal.period.name
-  tr
-    td(colspan="2")
-      button.delete delete
+#title.section
+  h1 #{goal.action} #{goal.quantity} #{goal.unit}
+
+#entry.section
+  select#dateSelector
+    each d in dates
+      option= d.toDateString()
+  button -10
+  button +10
+
+#progress.section
+  h2 
+    span Remaining 
+    span#remaining= goal.remaining
+  //canvas.bar
     
-h2 Records
+#records.section
+  h2
+    a.expand +
+    span Records
 
-table
-  each record in goal.records
-    tr
-      td
-      td= record.date
-      td= record.quantity
+  table.collapser
+    each record in goal.records
+      tr
+        td= record.date.toDateString()
+        td= record.quantity
+        
+#actions.section
+  button.delete delete
