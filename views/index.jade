@@ -1,3 +1,4 @@
+script(src='/javascripts/index.js')
 h1= title
 table
   tr
@@ -32,15 +33,13 @@ table
   tr
     td(colspan="6"): hr
   tr
-    form(method="post", action="/new")
-      td
-      td: input(name="action")
-      td: input(name="quantity")
-      td: input(name="unit")
-      td: select(name="period")
-        option(value="Year") Year
-        option(value="Month") Month
-        option(value="Week") Week
-        option(value="Day") Day
-        option(value="Hour") Hour
-      td: input(type="submit", value="add goal")
+    td
+    td: input#action
+    td: input#quantity
+    td: input#unit
+    td: select#period
+      option(value="Year") Year
+      option(value="Month") Month
+      option(value="Week") Week
+      option(value="Day") Day
+    td: button#addGoal add goal

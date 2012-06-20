@@ -74,13 +74,13 @@ app.post('/goal/:id/add', function(req, res){
   })
 })
 
-app.post('/new', function(req, res){
+app.put('/goal', function(req, res){
   model.addGoal(req.param('action'), 
     req.param('quantity'),
     req.param('unit'), 
     req.param('period'), 
     function(err, goal){
-      res.redirect('/');
+      res.send(201);
   })
 })
 
